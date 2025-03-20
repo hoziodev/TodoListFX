@@ -9,4 +9,10 @@ module appli {
 
     opens appli.accueil to javafx.fxml;
     exports appli.accueil;
+
+    opens appli.views to javafx.fxml;
+    exports appli.views;
+
+    opens model to javafx.fxml;
+    exports model;
 }

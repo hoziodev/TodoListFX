@@ -56,7 +56,7 @@ public class UtilisateurRepository {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Utilisateur utilisateur = new Utilisateur(rs.getInt("id_user"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mot_de_passe"), rs.getNString("role"));
+                Utilisateur utilisateur = new Utilisateur(rs.getInt("id_utilisateur"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("mot_de_passe"), rs.getNString("role"));
                 utilisateurs.add(utilisateur);
             }
             System.out.println("Récupération réussi all");
