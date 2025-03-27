@@ -26,7 +26,7 @@ public class AccueilControler {
     @FXML
     void onVerif(ActionEvent event) throws IOException {
         System.out.println(SessionUtilisateur.getInstance().getUtilisateur());
-        StartApplication.changeScene("views/Table");
+        StartApplication.changeScene("user/GestionUser");
     }
 
 }

@@ -1,5 +1,6 @@
-package appli.views;
+package appli.user;
 
+import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -9,19 +10,29 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import model.Utilisateur;
 import repository.UtilisateurRepository;
+import javafx.scene.control.Button;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class TableViewController implements Initializable {
+public class GestionUserController implements Initializable {
     @FXML
     private TableView<Utilisateur> tableau;
+    @FXML
+    private Button btnDeco;
+
+    @FXML
+    private Button btnSupprimer;
+
+    private Utilisateur selection;
+
+    private UtilisateurRepository userRepository  = new UtilisateurRepository();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UtilisateurRepository userRepository  = new UtilisateurRepository();
         String [][] colonnes = {
                 { "Id Utilisateur","id" },
                 { "Nom","nom" },
@@ -45,12 +56,39 @@ public class TableViewController implements Initializable {
     }
 
     @FXML
-    void onMouseClicked(MouseEvent event) {
+    void onMouseClicked(MouseEvent event) throws IOException {
+        selection = tableau.getSelectionModel().getSelectedItem();
+        if (selection != null) {
+            btnSupprimer.setDisable(false);
+        }else{
+            btnSupprimer.setDisable(true);
+        }
+        if (event.getClickCount() == 2) {
+            if (selection != null) {
+                StartApplication.changeScene("user/ModificationUser");
+                ModificationUserController controller = (ModificationUserController)
+                        StartApplication. getControllerFromStage();
+                controller.initData(selection);
+            }
+        }
 
     }
 
     @FXML
-    void supprimer(ActionEvent event) {
+    void onDeco(ActionEvent event) {
 
+    }
+
+    @FXML
+    void onSup(ActionEvent event) {
+        System.out.println(selection.getEmail());
+        if(userRepository.supprimerUtilisateurParEmail(selection.getEmail())){
+            tableau.getItems().remove(selection);
+        }
+    }
+
+    @FXML
+    void onAccueil(ActionEvent event) throws IOException {
+        StartApplication.changeScene("accueil/AccueilView");
     }
 }

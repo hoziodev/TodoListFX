@@ -66,32 +66,36 @@ public class UtilisateurRepository {
         return utilisateurs;
     }
 
-    public void supprimerUtilisateurParEmail(String email) {
-        String sql = "DELETE FROM utilisateurs WHERE email = ?";
+    public boolean supprimerUtilisateurParEmail(String email) {
+        String sql = "DELETE FROM utilisateur WHERE email = ?";
 
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.executeUpdate();
             System.out.println("Suppresion réussi");
+            return true;
         } catch (SQLException e) {
             System.out.println("Erreur supression user");
+            return false;
         }
     }
 
-    public void mettreAJourUtilisateur(Utilisateur utilisateur) {
-        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, mdp = ? WHERE email = ?";
-
+    public boolean mettreAJourUtilisateur(Utilisateur utilisateur) {
+        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, role = ? WHERE id_utilisateur = ?";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, utilisateur.getNom());
             stmt.setString(2, utilisateur.getPrenom());
-            stmt.setString(3, utilisateur.getMot_de_passe());
-            stmt.setString(4, utilisateur.getEmail());
+            stmt.setString(3, utilisateur.getEmail());
+            stmt.setString(4, utilisateur.getRole());
+            stmt.setInt(5, utilisateur.getId());
             stmt.executeUpdate();
             System.out.println("Modification réussi");
+            return true;
         } catch (SQLException e) {
             System.out.println("Erreur modification");
+            return false;
         }
     }
 

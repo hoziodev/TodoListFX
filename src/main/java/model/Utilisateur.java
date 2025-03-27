@@ -80,6 +80,6 @@ public class Utilisateur {
     }
 
     public String toString() {
-        return "Id : " + id + "\nNom: " + nom + "\nPrenom: " + prenom + "\nEmail: " + email + "\nMot de passe: " + mot_de_passe;
+        return "Id : " + id + "\nNom: " + nom + "\nPrenom: " + prenom + "\nEmail: " + email + "\nMot de passe: " + mot_de_passe + "\nRôle: " + role;
     }
 }
