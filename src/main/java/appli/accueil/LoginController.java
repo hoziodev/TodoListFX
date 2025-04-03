@@ -65,8 +65,8 @@ public class LoginController {
     }
 
     @FXML
-    void onMdpLost(ActionEvent event) {
-
+    void onMdpLost(ActionEvent event) throws IOException {
+        StartApplication.changeScene("accueil/MotDePasseOublie");
     }
 
 }

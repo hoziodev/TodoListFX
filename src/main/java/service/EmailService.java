@@ -7,13 +7,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 public class EmailService {
     private static final SecureRandom random = new SecureRandom();
-    private static final String EMAIL_SENDER = "mpd.oublie@hoziodev.fr";
-    private static final String PASSWORD = "r53f!MEs";
+    private static final String EMAIL_SENDER = "todolistjavafx@gmail.com";
+    private static final String PASSWORD = "qxig rkbe dhgz mdkb";
     public static void envoyerEmail(String destinataire, String sujet, String messageTexte) {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.hoziodev.fr");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
