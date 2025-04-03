@@ -99,4 +99,19 @@ public class UtilisateurRepository {
         }
     }
 
+    public boolean mettreAJourMdp(Utilisateur utilisateur) {
+        String sql = "UPDATE utilisateur SET mot_de_passe = ? WHERE email = ?";
+        try {
+            PreparedStatement stmt = connexion.prepareStatement(sql);
+            stmt.setString(1, utilisateur.getMot_de_passe());
+            stmt.setString(2, utilisateur.getEmail());
+            stmt.executeUpdate();
+            System.out.println("Modification réussi");
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur modification");
+            return false;
+        }
+    }
+
 }
