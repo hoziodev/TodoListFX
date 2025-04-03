@@ -5,10 +5,13 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+
 public class EmailService {
     private static final SecureRandom random = new SecureRandom();
     private static final String EMAIL_SENDER = "todolistjavafx@gmail.com";
-    private static final String PASSWORD = "qxig rkbe dhgz mdkb";
+    private static final String PASSWORD = "orjtmnvbygmvgywz";
+
     public static void envoyerEmail(String destinataire, String sujet, String messageTexte) {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
