@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.AccueilControler">
+<AnchorPane onDragDetected="#onModificationProfil" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.accueil.AccueilControler">
    <children>
-      <Button fx:id="deco" layoutX="46.0" layoutY="35.0" mnemonicParsing="false" onAction="#onDeco" text="deco" />
-      <Button fx:id="verif" layoutX="133.0" layoutY="35.0" mnemonicParsing="false" onAction="#onVerif" text="Go table" />
+      <Button fx:id="deco" layoutX="25.0" layoutY="345.0" mnemonicParsing="false" onAction="#onDeco" prefHeight="26.0" prefWidth="114.0" text="Déconexion" />
+      <Button fx:id="verif" layoutX="169.0" layoutY="345.0" mnemonicParsing="false" onAction="#onVerif" text="ADMIN" />
+      <TableView fx:id="tableauListe" layoutX="283.0" layoutY="14.0" onMouseClicked="#onMouseClickListe" prefHeight="296.0" prefWidth="286.0" />
+      <Text layoutX="44.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bonjour" />
+      <Label fx:id="sonNom" layoutX="104.0" layoutY="27.0" />
+      <Text layoutX="44.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici vos listes de tache" />
+      <Button layoutX="25.0" layoutY="306.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Modification Profil" />
+      <Button layoutX="427.0" layoutY="320.0" mnemonicParsing="false" onAction="#onCreerListe" text="Créer liste" />
+      <Button layoutX="283.0" layoutY="358.0" mnemonicParsing="false" onAction="#onSupListe" text="Supprimer liste" />
+      <TextField fx:id="nomListe" layoutX="283.0" layoutY="320.0" prefHeight="26.0" prefWidth="144.0" />
+      <Label fx:id="erreurCreation" layoutX="521.0" layoutY="325.0" textFill="RED" />
+      <Label fx:id="okCreation" layoutX="521.0" layoutY="325.0" textFill="#22ff00" />
    </children>
 </AnchorPane>

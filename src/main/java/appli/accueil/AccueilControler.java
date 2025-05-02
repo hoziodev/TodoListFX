@@ -3,18 +3,64 @@ package appli.accueil;
 import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Liste;
+import model.Utilisateur;
+import repository.ListeRepository;
 import session.SessionUtilisateur;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class AccueilControler {
+public class AccueilControler implements Initializable {
 
     @FXML
     private Button deco;
 
     @FXML
     private Button verif;
+
+    @FXML
+    private Label sonNom;
+
+    @FXML
+    private TableView<Liste> tableauListe;
+
+    @FXML
+    private Label erreurCreation;
+
+    @FXML
+    private Label okCreation;
+
+    @FXML
+    private TextField nomListe;
+
+    ListeRepository listeRepository = new ListeRepository();
+
+    public void initialize(URL location, ResourceBundle resources) {
+        sonNom.setText(SessionUtilisateur.getInstance().getUtilisateur().getNom());
+        String [][] colonnes = {
+                { "Nom","nom" }
+        };
+
+        for ( int i = 0 ; i < colonnes.length ; i ++ ){
+            //Création de la colonne avec le titre
+            TableColumn<Liste,String> maCol = new TableColumn<>(colonnes[i][0]);
+            //Ligne permettant la liaison automatique de la cellule avec la propriété
+            maCol.setCellValueFactory(
+                    new PropertyValueFactory<Liste,String>(colonnes[i][1]));
+            //Ajout de la colonne dans notre tableau
+            tableauListe.getColumns().add(maCol);
+        }
+        ArrayList<Liste> listes = listeRepository.getAllListesUser();
+        tableauListe.getItems().addAll(listes);
+
+    }
 
     @FXML
     void onDeco(ActionEvent event) throws IOException {
@@ -29,4 +75,24 @@ public class AccueilControler {
         StartApplication.changeScene("user/GestionUser");
     }
 
+    @FXML
+    void onModificationProfil(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onMouseClickListe(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onCreerListe(ActionEvent event) {
+        int id = SessionUtilisateur.getInstance().getUtilisateur().getId();
+        listeRepository.createListe(nomListe.getText(), id);
+    }
+
+    @FXML
+    void onSupListe(ActionEvent event) {
+
+    }
 }

@@ -20,4 +20,13 @@ public class Liste {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public Liste(String nom) {
+        this.nom = nom;
+    }
+
+    public Liste(int id,String nom) {
+        this.id = id;
+        this.nom = nom;
+    }
 }

@@ -33,6 +33,7 @@ public class GestionUserController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         String [][] colonnes = {
                 { "Id Utilisateur","id" },
                 { "Nom","nom" },
@@ -67,7 +68,7 @@ public class GestionUserController implements Initializable {
             if (selection != null) {
                 StartApplication.changeScene("user/ModificationUser");
                 ModificationUserController controller = (ModificationUserController)
-                        StartApplication. getControllerFromStage();
+                        StartApplication.getControllerFromStage();
                 controller.initData(selection);
             }
         }
@@ -89,6 +90,6 @@ public class GestionUserController implements Initializable {
 
     @FXML
     void onAccueil(ActionEvent event) throws IOException {
-        StartApplication.changeScene("accueil/AccueilView");
+        StartApplication.changeScene("accueil/Accueil");
     }
 }
