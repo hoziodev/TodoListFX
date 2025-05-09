@@ -3,6 +3,7 @@ package appli.liste;
 import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,7 +21,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ListeController {
+public class ListeController implements Initializable {
 
     @FXML
     private Label nomListe;
@@ -29,12 +30,21 @@ public class ListeController {
     private TextField nomTache;
 
     @FXML
+    private TextField etatTache;
+
+
+    @FXML
+    private TextField refType;
+
+    @FXML
     private TableView<Tache> tableauTache;
 
     private Tache tache;
 
+    private int refListe;
 
-    private TacheRepository tacheRepository = new TacheRepository();
+
+    private final TacheRepository tacheRepository = new TacheRepository();
 
     public void initialize(URL location, ResourceBundle resources) {
         String [][] colonnes = {
@@ -59,7 +69,7 @@ public class ListeController {
 
     @FXML
     void ajoutTache(ActionEvent event) {
-
+        tableauTache.getItems().add(tacheRepository.ajoutTache(nomTache.getText(), Integer.parseInt(etatTache.getText()),refListe, Integer.parseInt(refType.getText())));
     }
 
     @FXML
@@ -69,13 +79,14 @@ public class ListeController {
 
     @FXML
     void supTache(ActionEvent event) {
-        System.out.println(tache.getId());
-        if(tacheRepository.supTache(tache.getId()));{
+        System.out.println(tableauTache.getSelectionModel().getSelectedItem().getId());
+        if(tacheRepository.supTache(tableauTache.getSelectionModel().getSelectedItem().getId()));{
             tableauTache.getItems().remove(tache);
         }
     }
 
     public void initData(Liste liste) {
+        refListe = liste.getId();
     }
 
     @FXML

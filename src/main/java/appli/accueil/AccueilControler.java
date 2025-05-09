@@ -47,7 +47,11 @@ public class AccueilControler implements Initializable {
     ListeRepository listeRepository = new ListeRepository();
 
     public void initialize(URL location, ResourceBundle resources) {
-        sonNom.setText(SessionUtilisateur.getInstance().getUtilisateur().getNom());
+        Utilisateur user = SessionUtilisateur.getInstance().getUtilisateur();
+        if (!user.getRole().equals( "admin")){
+            verif.setDisable(true);
+        }
+        sonNom.setText(user.getNom());
         String [][] colonnes = {
                 { "Nom","nom" }
         };
@@ -90,6 +94,9 @@ public class AccueilControler implements Initializable {
         if (event.getClickCount() == 2) {
             if (liste != null) {
                 StartApplication.changeScene("liste/Liste");
+                ListeController controller = (ListeController)
+                        StartApplication.getControllerFromStage();
+                controller.initData(liste);
             }
         }
     }

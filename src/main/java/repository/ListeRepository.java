@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class ListeRepository {
 
-    private Connection connexion;
+    private final Connection connexion;
 
     public ListeRepository() {
         this.connexion = Database.getConnexion();
@@ -23,7 +23,7 @@ public class ListeRepository {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Liste liste = new Liste(rs.getInt("id_liste"),rs.getString("nom"));
+                Liste liste = new Liste(rs.getInt(1),rs.getString(2));
                 listes.add(liste);
             }
             System.out.println("Récupération réussi all");
