@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.liste.ListeController">
+   <children>
+      <TableView fx:id="tableauTache" layoutX="32.0" layoutY="39.0" onMouseClicked="#onMouseClickTache" prefHeight="260.0" prefWidth="238.0" />
+      <Label fx:id="nomListe" layoutX="113.0" layoutY="14.0" />
+      <Button layoutX="29.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajoutTache" text="ajout tache" />
+      <Button layoutX="32.0" layoutY="345.0" mnemonicParsing="false" onAction="#supTache" text="sup tache" />
+      <TextField fx:id="nomTache" layoutX="107.0" layoutY="310.0" />
+      <Button layoutX="376.0" layoutY="345.0" mnemonicParsing="false" text="accueil" />
+      <Button layoutX="300.0" layoutY="345.0" mnemonicParsing="false" onAction="#allerType" text="Type" />
+   </children>
+</AnchorPane>

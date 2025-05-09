@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.liste.TypeController">
+   <children>
+      <TableView fx:id="tableauTache" layoutX="51.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="51.0" layoutY="276.0" mnemonicParsing="false" onAction="#ajoutTache" text="ajout" />
+      <TextField fx:id="nomTache" layoutX="94.0" layoutY="276.0" />
+      <Label layoutX="53.0" layoutY="310.0" text="couleur" />
+      <TextField fx:id="couleur" layoutX="94.0" layoutY="306.0" />
+      <Button layoutX="47.0" layoutY="347.0" mnemonicParsing="false" onAction="#supTache" text="sup" />
+      <Button layoutX="351.0" layoutY="276.0" mnemonicParsing="false" onAction="#retourListe" text="Liste" />
+   </children>
+</AnchorPane>

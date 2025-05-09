@@ -14,6 +14,9 @@ module appli {
     opens appli.user to javafx.fxml;
     exports appli.user;
 
+    opens appli.liste to javafx.fxml;
+    exports appli.liste;
+
     opens model to javafx.fxml;
     exports model;
 }

@@ -6,7 +6,6 @@ import session.SessionUtilisateur;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListeRepository {
 
@@ -35,31 +34,32 @@ public class ListeRepository {
     }
 
     public ArrayList<Liste> getAllListesUser() {
-        String sql = "SELECT * FROM liste WHERE id_liste = (SELECT ref_liste FROM utilisateur_liste WHERE ref_utilisateur = ?)";
-        ArrayList<Liste> listes = new ArrayList<Liste>();
+        String sql = "SELECT * FROM liste INNER JOIN utilisateur_liste ON liste.id_liste = utilisateur_liste.ref_liste WHERE utilisateur_liste.ref_utilisateur = ?";
+        ArrayList<Liste> listes = new ArrayList<>();
 
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setInt(1, SessionUtilisateur.getInstance().getUtilisateur().getId());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Liste liste = new Liste(rs.getInt("id_liste"),rs.getString("nom"));
+                Liste liste = new Liste(rs.getInt(1),rs.getString(2));
                 listes.add(liste);
             }
             System.out.println("Récupération réussi all");
         } catch (SQLException e) {
-            System.out.println("Erreur recuperation all liste user");
+            System.out.println("Erreur recuperation all liste user"+e.getMessage());
         }
         return listes;
     }
 
-    public void createListe(String nom, int id) {
+    public Liste createListe(String nom, int id) {
         String sqlListe = "INSERT INTO liste(nom) VALUES (?)";
         Liste liste = new Liste(nom);
         String sqlLien = "INSERT INTO  utilisateur_liste VALUES (?,?)";
         int idListe = 0;
         ResultSet rs = null;
         int autoIncKeyFromApi = -1;
+
 
         try{
             PreparedStatement stmt = connexion.prepareStatement(sqlListe,Statement.RETURN_GENERATED_KEYS);
@@ -81,8 +81,12 @@ public class ListeRepository {
             stmt.setInt(2,autoIncKeyFromApi);
             stmt.executeUpdate();
             System.out.println("Lien reussi");
+            liste.setId(autoIncKeyFromApi);
+            return liste;
+
         }catch (SQLException e) {
             System.out.println("Erreur ajout lien liste user");
+            return null;
         }
     }
 }

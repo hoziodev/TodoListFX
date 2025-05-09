@@ -1,6 +1,8 @@
 package appli.accueil;
 
 import appli.StartApplication;
+import appli.liste.ListeController;
+import appli.user.ModificationUserController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,6 +42,8 @@ public class AccueilControler implements Initializable {
     @FXML
     private TextField nomListe;
 
+    private Liste liste;
+
     ListeRepository listeRepository = new ListeRepository();
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,19 +80,24 @@ public class AccueilControler implements Initializable {
     }
 
     @FXML
-    void onModificationProfil(MouseEvent event) {
+    void onModificationProfil(MouseEvent event) throws IOException {
 
     }
 
     @FXML
-    void onMouseClickListe(MouseEvent event) {
-
+    void onMouseClickListe(MouseEvent event) throws IOException {
+        liste = tableauListe.getSelectionModel().getSelectedItem();
+        if (event.getClickCount() == 2) {
+            if (liste != null) {
+                StartApplication.changeScene("liste/Liste");
+            }
+        }
     }
 
     @FXML
     void onCreerListe(ActionEvent event) {
         int id = SessionUtilisateur.getInstance().getUtilisateur().getId();
-        listeRepository.createListe(nomListe.getText(), id);
+        tableauListe.getItems().add(listeRepository.createListe(nomListe.getText(), id));
     }
 
     @FXML
